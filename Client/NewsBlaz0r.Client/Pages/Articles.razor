@@ -6,6 +6,8 @@
 <h1>Articles</h1>
 <p>This fetches articles from our external API</p>
 
+
+
 @if (articles == null)
 {
     <p><em>Loading...</em></p>
@@ -13,6 +15,19 @@
 else
 {
     <div class="container-fluid">
+        
+        <div class="input-group w-25 mb-2">
+            <select @bind="SelectedEndpoint">
+                <option value="@Endpoints.AdNews"> Ad.nl - Algemeen</option>
+                <option value="@Endpoints.Ad112"> Ad.nl - 112</option>
+                <option value="@Endpoints.AdMisdaad"> Ad.nl - Misdaad</option>
+                <option value="@Endpoints.Police"> Alarmeringen.nl - Police</option>
+            </select>
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" @onclick="LoadEndpoint">Load</button>
+            </div>
+        </div>
+
         @foreach (var article in articles)
         {
             <div class="card w-100 mb-2">
@@ -27,10 +42,18 @@ else
 }
 
 @code {
+    private string SelectedEndpoint;
+    
     private List<Article> articles;
     
     protected override async Task OnInitializedAsync()
     {
         articles = await Http.GetFromJsonAsync<List<Article>>($"articles?endpoint={Endpoints.AdNews}");
     }
+
+    private async Task LoadEndpoint()
+    {
+        articles = await Http.GetFromJsonAsync<List<Article>>($"articles?endpoint={SelectedEndpoint}");
+    }
+
 }
