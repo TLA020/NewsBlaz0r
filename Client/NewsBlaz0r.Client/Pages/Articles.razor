@@ -10,7 +10,7 @@
 
 @if (articles == null)
 {
-    <p><em>Loading...</em></p>
+    <div class="spinner"></div>
 }
 else
 {
@@ -44,6 +44,7 @@ else
 
     private async Task LoadEndpoint()
     {
+        articles = null;
         articles = await Http.GetFromJsonAsync<List<Article>>($"articles?endpoint={SelectedEndpoint}");
     }
 
