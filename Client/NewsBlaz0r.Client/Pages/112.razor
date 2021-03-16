@@ -1,0 +1,75 @@
+﻿@page "/112"
+@using NewsBlaz0r.Shared.Models
+@using NewsBlaz0r.Client.Constants
+@inject HttpClient Http
+
+<h1>112</h1>
+<p>This fetches articles from our external API</p>
+
+@if (articles == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="container-fluid">
+        @foreach (var article in articles)
+        {
+            <div class="card w-100 mb-2">
+                <div class="card-body">
+                    <h5 class="card-title font-weight-bolder">@article.Description</h5>
+                    <p class="card-text">@article.Title</p>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@code {
+    private List<Article> articles;
+    
+    protected override async Task OnInitializedAsync()
+    {
+        articles = await Http.GetFromJsonAsync<List<Article>>($"articles?endpoint={Endpoints.RegioNoordHolland}");
+    }
+    
+    private string GetImage(string description)
+    {
+        foreach (EmergencyTypes emergency in Enum.GetValues(typeof(EmergencyTypes)))
+        {
+            var des = description.ToLower();
+            var em = emergency.ToString();
+            if (description.ToLower().Contains(emergency.ToString().ToLower()))
+            {
+                switch (emergency)
+                {
+                    case EmergencyTypes.Brandweer:
+                    {
+                        return "";
+                    }
+                    case EmergencyTypes.Ambulance:
+                    {
+                        return "";
+                    };
+                    case EmergencyTypes.Politie:
+                    {
+                        return "";
+                    }
+                    case EmergencyTypes.KNRM:
+                    {
+                        return "";
+                    }
+                    case EmergencyTypes.Traumaheli:
+                    {
+                        return "";
+                    }
+                    default:
+                    {
+                        return "";
+                    }
+                }
+            }
+        }
+        return "";
+    }
+}
