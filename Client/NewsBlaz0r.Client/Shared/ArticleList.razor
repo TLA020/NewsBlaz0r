@@ -2,14 +2,23 @@
 
 <div>
 @foreach (var article in Articles)
-    {
-        <div class="card w-100 mb-2">
-            <div class="card-body">
-                <h5 class="card-title font-weight-bolder">@article.Description</h5>
-                <p class="card-text">@article.Title</p>
+{
+    <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        @if (!string.IsNullOrEmpty(article.ImageUrl))
+        {
+            <div class="col-auto d-none d-lg-block">
+                <img src="@article.ImageUrl" width="200" height="250" alt="image">
             </div>
+        }
+        <div class="col p-4 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-2 text-primary">Article</strong>
+            <h3 class="mb-0">@article.Title</h3>
+            <div class="mb-1 text-muted">@article.PublishDate</div>
+            <p class="card-text mb-auto">@article.DescriptionTrimmed</p>
+            <a href="#" class="stretched-link">Continue reading</a>
         </div>
-    }
+    </div>
+}
 </div>
 
 @code {
