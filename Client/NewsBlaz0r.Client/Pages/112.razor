@@ -13,15 +13,7 @@
 else
 {
     <div class="container-fluid">
-        @foreach (var article in articles)
-        {
-            <div class="card w-100 mb-2">
-                <div class="card-body">
-                    <h5 class="card-title font-weight-bolder">@article.Description</h5>
-                    <p class="card-text">@article.Title</p>
-                </div>
-            </div>
-        }
+        <ArticleList Articles="@articles"/>
     </div>
 }
 

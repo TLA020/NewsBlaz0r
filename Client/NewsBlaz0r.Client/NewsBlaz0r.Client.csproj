@@ -14,4 +14,8 @@
     <ProjectReference Include="..\..\Shared\NewsBlaz0r.Shared\NewsBlaz0r.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Components\ArticleList.razor" />
+  </ItemGroup>
+
 </Project>

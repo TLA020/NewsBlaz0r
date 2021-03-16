@@ -28,16 +28,7 @@ else
             </div>
         </div>
 
-        @foreach (var article in articles)
-        {
-            <div class="card w-100 mb-2">
-                <div class="card-body">
-                    <h5 class="card-title font-weight-bolder">@article.Title</h5>
-                    <p class="card-text">@article.DescriptionTrimmed</p>
-                    <a href="#" class="btn btn-primary float-right">Read More</a>
-                </div>
-            </div>
-        }
+        <ArticleList Articles="@articles"/>
     </div>
 }
 
